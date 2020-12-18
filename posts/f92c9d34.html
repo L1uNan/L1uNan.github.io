@@ -1,0 +1,160 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>关于Restful 和JSON-RPC的 一点理解 | NanPy</title><meta name="description" content="关于Restful 和JSON-RPC的 一点理解"><meta name="keywords" content="计算机网络"><meta name="author" content="L1uNan"><meta name="copyright" content="L1uNan"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/gtx.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="关于Restful 和JSON-RPC的 一点理解"><meta name="twitter:description" content="关于Restful 和JSON-RPC的 一点理解"><meta name="twitter:image" content="http://cnd.nanpy.top/post.jpg"><meta property="og:type" content="article"><meta property="og:title" content="关于Restful 和JSON-RPC的 一点理解"><meta property="og:url" content="http://nanpy.top/posts/f92c9d34.html"><meta property="og:site_name" content="NanPy"><meta property="og:description" content="关于Restful 和JSON-RPC的 一点理解"><meta property="og:image" content="http://cnd.nanpy.top/post.jpg"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="canonical" href="http://nanpy.top/posts/f92c9d34.html"><link rel="prev" title="python安装第三方包 read timeout" href="http://nanpy.top/posts/c279f0f4.html"><link rel="next" title="github 显示无效证书  连接超时" href="http://nanpy.top/posts/a392acea.html"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: {"bookmark":{"message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#2d3035","position":"bottom-left"},
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: false,
+  isPhotoFigcaption: false
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isSidebar: false  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="NanPy" type="application/atom+xml">
+</head><body><canvas class="fireworks"></canvas><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="http://cnd.nanpy.top/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">46</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">36</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">18</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/heart/"><i class="fa-fw fa fa-heartbeat"></i><span> 点点</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-gamepad" aria-hidden="true"></i><span> 娱乐</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-headphones"></i><span> 音乐</span></a></li><li><a class="site-page" href="/Gallery/"><i class="fa-fw fa fa-camera"></i><span> 照片</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-grav"></i><span> 关于我</span></a></div></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(http://cnd.nanpy.top/post.jpg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">NanPy</a></span><span class="pull_right menus"><div id="search_button"><a class="site-page social-icon search"><i class="fa fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/heart/"><i class="fa-fw fa fa-heartbeat"></i><span> 点点</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-gamepad" aria-hidden="true"></i><span> 娱乐</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-headphones"></i><span> 音乐</span></a></li><li><a class="site-page" href="/Gallery/"><i class="fa-fw fa fa-camera"></i><span> 照片</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-grav"></i><span> 关于我</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">关于Restful 和JSON-RPC的 一点理解</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date" title="发表于 2020-03-27 14:27:16"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2020-03-27</time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></span></div><div class="meta-secondline"> <span class="post-meta-wordcount"><i class="post-meta__icon fa fa-file-word-o" aria-hidden="true"></i><span>字数总计:</span><span class="word-count">2k</span><span class="post-meta__separator">|</span><i class="post-meta__icon fa fa-clock-o" aria-hidden="true"></i><span>阅读时长: 6 分钟</span></span></div><div class="meta-thirdline"><span class="post-meta-pv-cv"><span class="post-meta__separator">|</span><i class="fa fa-eye post-meta__icon" aria-hidden="true"> </i><span>阅读量:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"><span class="post-meta__separator">|</span><i class="post-meta__icon fa fa-comment-o" aria-hidden="true"></i><span>评论数:</span><a href="/posts/f92c9d34.html#post-comment" itemprop="discussionUrl"><span class="valine-comment-count comment-count" data-xid="/posts/f92c9d34.html" itemprop="commentCount"></span></a></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div id="article-container"><ul>
+<li>REST要求要将接口以资源的形式呈现。但实际上，很多时候都不太可能将一些业务逻辑看作资源。即使强制这么干了，也会非常非常别扭。登录就是登录，而不是“创建一个session”；播放音乐就是播放，而不是“创建一个播放状态“。</li>
+<li>REST只提供了增删改查的基本语义，其他的语义基本上不管。比如批量添加，批量删除，修改一个资源的一部分字段。区分“物理删除”和“标记删除”等等。复杂的查询更加不显示，对于像筛选这类的场景，REST明显就是个渣。这里要表扬一下GraphQL（但GraphQL有其他的问题，在此不展开）</li>
+<li>REST建议用HTTP的status<br>
+code做错误码，以便于“统一”，实际上这非常难统一。各种业务的含义五花八门，抽象层次高低不齐，根本就无法满足需要。比如一个404到底是代表这个接口找不到，还是代表一个资源找不到。400表达请求有问题，但是我想提示用户“你登录手机号输入的格式不对“，还是“你登录手机号已经被占用了“。既然201表示“created”，为啥deleted和updated没有对应的status<br>
+code，只能用200或者204（no<br>
+content）？错误处理是web系统里最麻烦的，最需要细心细致的地方。REST风格在这里只能添乱。</li>
+<li>web请求参数可能散布在url<br>
+path、querystring、body、header。服务器端处理对此完全没有什么章法。客户端和服务器端的研发之间还是要做约定。</li>
+<li>在url path上的变量会对很多其他的工作带来不良影响。</li>
+</ul>
+<blockquote>
+<p>比如监控，本来url可以作为一个接口的key统计次数/延迟，结果url里出了个变量，所以自动收集nginx的access<br>
+log，自动做监控项目增加就没法弄了。再比如，想对接口做流量控制的计数，本来url可以做key，因为有变量，就得多费点事才行。</p>
+</blockquote>
+<ul>
+<li>现实中接口要处理的真正的问题，REST基本上也没怎么管。比如认证、授权、流控、数据缓存（http的etag还起了点作用）、超时控制、数据压缩……</li>
+<li>REST有很多好的工具可以便利的生成对应的代码和文档，也容易形成规范。但问题是REST在实际的项目中并没有解决很多问题，也在很多时候不合用，因此产生的代码和文档也就没什么用，必须经过二次加工才能真的用起来。因此可以基于REST+你的业务场景定义一个你自己的规范。</li>
+</ul>
+<p>REST的本意是基于一个<strong>架构的假设</strong>（资源化），定义了一组风格，并基于这个风格形成约定、工具和支持。思路不错。但是因为他的架构假设就是有问题的，因此后续一系列东西都建立在了一个不稳固的基础之上。<br>
+同时，REST并没有解决太多的实际问题。是，的确，有些时候，用REST完成CRUD已经能完成任务了。此时，用REST没有什么不好的。<br>
+但是，现实当中，真正的业务领域一般都会比资源的CRUD复杂的多。<br>
+这时REST“基本上没解决太多实际问题”的缺点就会体现出来。<br>
+我所见到的大多数情况，是会形成一种REST-like形式的接口，像REST却又不限于REST。为了REST，我看到了太多的人在争执到底是POST还是PUT，到底用querystring还是body，到底用200还是201，到底一个单词应该用单数还是复数，到底一个请求参数应该放在url path的中间一段还是最后一段…… 真正要做的事情本身反而没人关心。<br>
+现实当中接口的开发的方式你可以总是从REST开始，如果你要开发的东西能被自然而然的想成是一个资源。然后通过相关的工具自动生成一些代码，把这个原型和你的合作者讨论一下。<br>
+这是我能想到的REST能做的一件很好的事情——快速实验。<br>
+然后如果你想认真的往下做，就可以彻底忘记REST这件事。开始自己定义业务接口，尽量不要在url里加变量。尽量只用GET和POST，减少一些沟通上的混乱。<br>
+对于每个接口，好好定义可能发生的业务错误，并与PM一起协商怎么处理这些错误。认真的考虑认证、授权、流控等机制，当你开发的是和钱相关的业务尤其要留意。<br>
+最后，本文并不是说“绝对不要用REST”，而是：如果你在实际工作中用REST有了困惑，不知道某个情况下REST此时的最佳实践是什么时，不要追求“真正的REST会怎么做”，不要被REST限制住。</p>
+<p>=======<br>
+restful首先是要求必须把所有的应用定义成为“resource”，然后只能针对资源做有限的四种操作。<br>
+这是对API一个非常糟糕的抽象，有太多现实中需要的API，无法顺当的融入到restful所定义的规范中。<br>
+比方说，user login / resetpassword等等。restful的信徒，他们会说可以根据这个那个规范，把login / password等也纳入为某种资源，然后进行增删改查。这在我看来，纯粹是在解决一些原本不存在，根本不需要解决的问题，纯浪费。所有的接口，服务器端原本就存在有相应的函数，它们本来就有自身的命名空间，接受的参数、返回值、异常等等。采用轻便的方式暴露出来即可。<br>
+无需把一堆函数重新归纳到“资源”，再削减脑袋把所有的操作都映射为“增删改查”。对应到web上，rpc的成熟方案非常多，有古老的soap，也有轻量的json rpc。JSON rpc基本上仅是要求所有的请求必须有msg id，有函数名，然后可定义参数，并且区分返回值与异常；也可定义『命名空间』来对函数模块做划分。这与大多数语言的模块、函数定义相符，使用起来是非常便利的。很多json rpc是供web前端ajax调用，若前端调用抽象得当，调用远程API，实际上与调用本地函数无甚区别。实际上，json rpc也未必需要跟http绑定，即便是在web上，它也可以走web socket，这样子，前端可以使用同一web socket管道批量发送请求，而服务器端乱序返回结果时，前端也可以根据msg id做准确的回调。websocket，批量调用，乱序返回，这些都可以显著提高API的输出吞吐，这些是在json rpc的设计考量内。调用更方便，性能也更好，两全其美是完全可能的。想当然的为了“快”，为了“简单”就必须牺牲别的，这是严重的思维误区。有些方案，纯粹就是糟糕的方案。restful API仅适用与业务非常简单的场景，比方说，就是为了提供少量数据表单的增删改查。而这种场景实在是太过简单，实际中几乎找不到。</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script></div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">L1uNan</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://nanpy.top/posts/f92c9d34.html">http://nanpy.top/posts/f92c9d34.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://nanpy.top" target="_blank">NanPy</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a></div><div class="post_share"><div class="social-share" data-image="http://cnd.nanpy.top/post5.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button button--primary button--animated"> <i class="fa fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="lazyload post-qr-code__img" src="/img/wechat.jpg" alt="微信"/><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="lazyload post-qr-code__img" src="/img/alipay.jpg" alt="支付宝"/><div class="post-qr-code__desc">支付宝</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/posts/c279f0f4.html"><img class="prev_cover lazyload" data-src="http://cnd.nanpy.top/post17.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">python安装第三方包 read timeout</div></div></a></div><div class="next-post pull_right"><a href="/posts/a392acea.html"><img class="next_cover lazyload" data-src="http://cnd.nanpy.top/post20.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">github 显示无效证书  连接超时</div></div></a></div></nav><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 评论</span></div><div class="vcomment" id="vcomment"></div><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var GUEST_INFO = ['nick','mail','link'];
+var guest_info = 'nick,mail,link'.split(',').filter(function(item){
+  return GUEST_INFO.indexOf(item) > -1
+});
+guest_info = guest_info.length == 0 ? GUEST_INFO :guest_info;
+
+window.valine = new Valine({
+  el:'#vcomment',
+  notify: true,
+  verify: true,
+  appId: 'OH7ASE912LXCvuRN4MLX5Gik-gzGzoHsz',
+  appKey: 'MS2dI4bwNwlpOjl4n4urQOrc',
+  placeholder: '如果你留下准确的联系方式，你将很快收到回复。',
+  avatar: 'monsterid',
+  meta: guest_info,
+  pageSize: '10',
+  lang: 'zh-cn',
+  recordIP: false,
+  serverURLs: ''
+});</script></div></article></main><footer id="footer" style="background-image: url(http://cnd.nanpy.top/post.jpg)" data-type="photo"><div id="footer-wrap"><div class="copyright">&copy;2020 By L1uNan</div><div class="footer_custom_text"><p>By L1uNan</p></div><div class="icp"><a href="http://www.beian.miit.gov.cn/state/outPortal/loginPortal.action" target="_blank" rel="noopener"><img class="icp-icon" src="/img/icp.png"/><span>京ICP备20016102号-1</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" target="_blank" rel="noopener" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="/js/third-party/fireworks.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script id="canvas_nest" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="/js/third-party/canvas-nest.js"></script><script src="/js/third-party/activate-power-mode.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@latest/lazysizes.min.js" async=""></script><script src="/js/search/local-search.js"></script></body></html>
